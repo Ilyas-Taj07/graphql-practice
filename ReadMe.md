@@ -106,7 +106,7 @@ And it sends queries/mutations like this:
 ## Backend
 
 <pre>
-npm install express apollo-server-express graphql mongoose
+npm install express apollo-server-express graphql mongoose nodemon cors dotenv
 </pre>
 
 
