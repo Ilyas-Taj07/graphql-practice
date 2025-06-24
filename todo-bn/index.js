@@ -11,7 +11,17 @@ const startServer = async () => {
 
     const app = express()
     app.use(cors())
-    const server = new ApolloServer({ typeDefs, resolvers })
+
+    const server = new ApolloServer({
+        typeDefs,
+        resolvers,
+        formatError: (error) => {
+            return {
+                message: error.message,
+                code: error.extensions?.code || "INTERNAL_SERVER_ERROR"
+            }
+        }
+    })
 
     await server.start()
 

@@ -1,0 +1,65 @@
+.register_card {
+    width: 500px;
+    background: #fefefe;
+    padding: 32px;
+    border-radius: 8px;
+}
+
+.register_header {}
+
+.register_header span {
+    font-size: 34px;
+    font-weight: 600;
+}
+
+.register_header p {
+    padding: 10px 0;
+}
+
+.register_header p label {
+    color: #007c89;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.register_field {
+    margin-top: 15px;
+}
+
+.register_field label {
+    font-weight: 500;
+}
+
+.register_field input {
+    width: 100%;
+    height: 40px;
+    padding-left: 12px;
+    border: 2px solid #d1cfcd;
+    border-radius: 6px;
+    margin-top: 5px;
+}
+
+.register_field input:focus {
+    border: 2px solid #007c89;
+    outline: none;
+}
+
+.register_action {
+    margin-top: 20px;
+}
+
+.register_action button {
+    font-size: 17px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    background: #007c89;
+    color: #fefefe;
+    cursor: pointer;
+    padding: 10px 35px;
+    height: 50px;
+}
+
+.register_action button:active {
+    scale: 0.95;
+}

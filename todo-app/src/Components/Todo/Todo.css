@@ -1,0 +1,140 @@
+.todo_container {
+    max-width: 100%;
+    width: 800px;
+    margin: 0 auto;
+}
+
+
+.todo_header {
+    padding: 10px;
+    background: #343a40;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo_header span {
+    background: transparent;
+    color: #fefefe;
+    font-size: 24px;
+}
+
+.todo_profile {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background: transparent;
+}
+
+.todo_profile p {
+    background: transparent;
+    color: #fefefe;
+}
+
+.todo_profile button {
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    background: #007c89;
+    color: #fefefe;
+    cursor: pointer;
+}
+
+.todo_add {
+    max-width: 100%;
+    width: 600px;
+    margin: 20px auto;
+    display: flex;
+    gap: 20px;
+}
+
+.todo_add input {
+    width: 100%;
+    background: #343a40;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    color: #fefefe;
+}
+
+.todo_add button {
+    padding: 10px 30px;
+    background: #007c89;
+    color: #fefefe;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+}
+
+.todo_add button:active {
+    scale: 0.95;
+}
+
+.todo_items {
+    height: 400px;
+    overflow: auto;
+}
+
+.todo_items::-webkit-scrollbar {
+    width: 8px;
+}
+
+.todo_items::-webkit-scrollbar-thumb {
+    background: #808080;
+    border-radius: 8px;
+}
+
+.todo_items::-webkit-scrollbar-track {
+    background: #343a40;
+}
+
+.todo_items span {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fefefe;
+    position: sticky;
+    top: 0;
+    display: block;
+    padding: 10px;
+}
+
+.todo_item {
+    display: flex;
+    margin: 10px 0;
+    padding: 10px;
+    gap: 10px;
+    border-bottom: 1px solid #808080;
+}
+
+.todo_item input[type=checkbox] {
+    width: 20px;
+}
+
+.todo_item p {
+    flex: 1;
+    color: #fefefe;
+}
+
+.todo_item input[type=text] {
+    flex: 1;
+    background: #343a40;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    color: #fefefe;
+}
+
+.todo_item button {
+    padding: 10px 30px;
+    background: #007c89;
+    color: #fefefe;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.todo_item button:active {
+    scale: 0.95;
+}

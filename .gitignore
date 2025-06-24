@@ -1,3 +1,6 @@
 /todo-bn/.env
 /todo-bn/node_modules
 /todo-bn/yarn.lock
+/todo-app/node_modules
+/todo-app/.env
+/todo-app/yarn.lock
