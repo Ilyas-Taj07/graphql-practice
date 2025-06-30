@@ -105,6 +105,7 @@
     padding: 10px;
     gap: 10px;
     border-bottom: 1px solid #808080;
+    align-items: center;
 }
 
 .todo_item input[type=checkbox] {
@@ -137,4 +138,12 @@
 
 .todo_item button:active {
     scale: 0.95;
+}
+
+
+.todo_items p {
+    color: #fefefe;
+    text-align: center;
+    margin: 50px 0;
+    font-size: 28px;
 }

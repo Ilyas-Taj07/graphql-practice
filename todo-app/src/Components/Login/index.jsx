@@ -9,8 +9,8 @@ function Login({ setIsRegister, setIsLogin }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const [token, { loading }] = useMutation(Token)
-    console.log('loading', loading)
+    const [token] = useMutation(Token)
+
     const handleLogin = async () => {
         try {
             if (email === '' || password === '') {
@@ -20,11 +20,16 @@ function Login({ setIsRegister, setIsLogin }) {
 
             let response = await token({ variables: { email, password } })
 
+            if (response.data.error) {
+                throw new Error(response.data.error.message)
+            }
+
             setCookie('user', response.data.token.user)
             setCookie('token', response.data.token.accessToken)
             setIsLogin(true)
         }
         catch (err) {
+            alert("Something went wrong")
             console.log('err', err)
         }
 

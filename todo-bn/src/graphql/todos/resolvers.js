@@ -1,8 +1,25 @@
 const Todo = require('../../model/Todo')
-
+const User = require('../../model/User')
 
 const todoResovler = {
 
+    Query: {
+
+        todos: async (_, { userId }) => {
+
+            let user = await User.findById(userId)
+
+            return user
+
+        }
+
+    },
+    User: {
+        todos: async (parent) => {
+            return await Todo.find({ user: parent.id }).select('_id todo isCompleted')
+        }
+    }
+    ,
     Mutation: {
 
         addTodo: async (_, { todo, userId }) => {

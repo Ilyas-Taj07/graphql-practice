@@ -1,18 +1,67 @@
 import React, { useEffect, useState } from 'react'
 import "./Todo.css"
 import { get_cookie } from '../../utils'
+import { ADD_TODO, DELETE_TODO, GET_TODOS } from '../../graphql/Todos'
+import { useQuery, useMutation } from '@apollo/client'
 
 function Todo() {
 
     const [todos, setTodos] = useState([])
     const [text, setText] = useState('')
     const username = get_cookie('user')?.name
+    const id = get_cookie('user')?.id
+
+    let { data, refetch } = useQuery(GET_TODOS, { variables: { userId: id } })
+    const [addtodo] = useMutation(ADD_TODO)
+
+    const [deleteTodo] = useMutation(DELETE_TODO)
 
     useEffect(() => {
 
-        setTodos(get_cookie('todos') || [])
+        if (data !== undefined) {
+            setTodos(data.todos.todos)
+        }
 
-    }, [])
+    }, [data])
+
+    const handleAddTodo = async () => {
+        if (text.trim().length !== 0) {
+
+            let todo = await addtodo({ variables: { todo: text, userId: id } })
+
+            if (!todo.errors) {
+                refetch()
+                setText('')
+            }
+            else {
+                console.error(todo.errors)
+            }
+
+        }
+        else {
+            alert("Please write something")
+        }
+    }
+
+    const handleDelete = async (todoId) => {
+
+        try {
+
+            let deleteTododata = await deleteTodo({ variables: { id: todoId } })
+
+            if (!deleteTododata.errors) {
+                refetch()
+            }
+            else {
+                console.error(deleteTododata.errors)
+            }
+
+        }
+        catch (err) {
+            console.error('err', err)
+        }
+
+    }
 
     return (
         <div className='todo_container'>
@@ -31,18 +80,21 @@ function Todo() {
                         value={text}
                         onChange={(e) => setText(e.target.value)}
                     />
-                    <button>Add</button>
+                    <button onClick={handleAddTodo}>Add</button>
                 </div>
                 <div className='todo_items'>
                     <span>Items</span>
                     {
-                        todos?.map((item, index) => {
+                        todos.length !== 0 ? todos?.map((item, index) => {
                             return <TodoItem
                                 key={index + '111'}
                                 todo={item?.todo}
                                 isCompleted={item?.isCompleted}
+                                todoId={item.id}
+                                handleDelete={handleDelete}
                             />
-                        })
+                        }) :
+                            <p>Please add TODO</p>
                     }
                 </div>
             </div>
@@ -53,7 +105,7 @@ function Todo() {
 export default Todo;
 
 
-function TodoItem() {
+function TodoItem({ todo, isCompleted, todoId, handleDelete }) {
 
     const [isEdit, setIsEdit] = useState(false)
     const [newText, setNewText] = useState('')
@@ -63,7 +115,7 @@ function TodoItem() {
             {
                 isEdit ?
                     <>
-                        <input type='checkbox' />
+                        <input type='checkbox' checked={isCompleted} />
                         <input
                             type='text'
                             placeholder='Edit it'
@@ -75,8 +127,8 @@ function TodoItem() {
                     :
                     <>
                         <input type='checkbox' />
-                        <p onDoubleClick={() => setIsEdit(true)}>Learn Graphql fastly adad ada da daadad adad ada dadadad ada dad ada da dadad ada dadaadd ad ada a</p>
-                        <button>Delete</button>
+                        <p onDoubleClick={() => setIsEdit(true)}>{todo}</p>
+                        <button onClick={() => handleDelete(todoId)}>Delete</button>
                     </>
             }
 
